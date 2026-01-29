@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X Hook Generator — Create Viral Tweet Hooks in Seconds</title>
+    <meta name="description" content="Generate scroll-stopping tweet hooks for any niche. Free tool by ConvoWise.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0a0a0a',
+                        darker: '#050505',
+                        accent: '#3b82f6',
+                        'accent-hover': '#2563eb',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hook-card {
+            transition: all 0.2s ease;
+        }
+        .hook-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-dark text-white antialiased min-h-screen">
+    <!-- Nav -->
+    <nav class="w-full bg-dark/80 backdrop-blur-lg border-b border-white/5">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold">
+                <span class="gradient-text">Hook Generator</span>
+            </div>
+            <a href="https://convowise.vercel.app" target="_blank" class="text-gray-400 hover:text-white text-sm transition-colors">
+                by ConvoWise →
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-6 py-12">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-black mb-4">
+                Generate <span class="gradient-text">Viral Tweet Hooks</span>
+            </h1>
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                Enter your topic and get scroll-stopping hooks based on proven viral formulas. 100% free.
+            </p>
+        </div>
+
+        <!-- Input Form -->
+        <div class="bg-darker border border-white/10 rounded-2xl p-6 md:p-8 mb-8">
+            <form id="hookForm" class="space-y-6">
+                <!-- Topic/Niche -->
+                <div>
+                    <label for="topic" class="block text-sm font-semibold text-gray-300 mb-2">
+                        What's your topic or niche? *
+                    </label>
+                    <input 
+                        type="text" 
+                        id="topic" 
+                        name="topic" 
+                        required
+                        placeholder="e.g., SaaS growth, cold email, fitness, AI tools"
+                        class="w-full bg-dark border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-colors"
+                    >
+                </div>
+
+                <!-- Specific Result (Optional) -->
+                <div>
+                    <label for="result" class="block text-sm font-semibold text-gray-300 mb-2">
+                        Any specific result or number? <span class="text-gray-500">(optional)</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="result" 
+                        name="result" 
+                        placeholder="e.g., 10K followers, $50K revenue, 100 clients"
+                        class="w-full bg-dark border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-colors"
+                    >
+                </div>
+
+                <!-- Timeframe (Optional) -->
+                <div>
+                    <label for="timeframe" class="block text-sm font-semibold text-gray-300 mb-2">
+                        Timeframe? <span class="text-gray-500">(optional)</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="timeframe" 
+                        name="timeframe" 
+                        placeholder="e.g., 90 days, 6 months, 1 year"
+                        class="w-full bg-dark border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-colors"
+                    >
+                </div>
+
+                <!-- Generate Button -->
+                <button 
+                    type="submit"
+                    class="w-full bg-accent hover:bg-accent-hover text-white font-bold py-4 px-6 rounded-xl transition-all text-lg"
+                >
+                    Generate Hooks 🚀
+                </button>
+            </form>
+        </div>
+
+        <!-- Results -->
+        <div id="results" class="hidden">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold">Your Hooks</h2>
+                <button 
+                    onclick="copyAllHooks()"
+                    class="text-sm text-accent hover:text-accent-hover transition-colors"
+                >
+                    Copy All
+                </button>
+            </div>
+            <div id="hooksContainer" class="space-y-4">
+                <!-- Hooks will be inserted here -->
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div id="ctaSection" class="hidden mt-12 bg-gradient-to-r from-accent/10 to-purple-500/10 border border-accent/20 rounded-2xl p-8 text-center fade-in">
+            <h3 class="text-2xl font-bold mb-3">Want More Than Just Hooks?</h3>
+            <p class="text-gray-400 mb-6 max-w-xl mx-auto">
+                We'll flood your calendar with qualified leads from X — done for you. No effort required.
+            </p>
+            <a 
+                href="https://convowise.vercel.app/#apply" 
+                target="_blank"
+                class="inline-block bg-accent hover:bg-accent-hover text-white font-bold py-3 px-8 rounded-xl transition-all"
+            >
+                Learn About ConvoWise →
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 mt-16">
+        <div class="max-w-4xl mx-auto px-6 py-8 text-center text-gray-500 text-sm">
+            Built by <a href="https://convowise.vercel.app" target="_blank" class="text-accent hover:underline">ConvoWise</a> — X Outreach Done For You
+        </div>
+    </footer>
+
+    <script>
+        // Hook templates
+        const hookTemplates = {
+            boldStatement: [
+                "Nobody talks about this, but {topic} is {insight}.",
+                "Unpopular opinion: Most people are doing {topic} completely wrong.",
+                "Everything you've been told about {topic} is a lie.",
+                "Stop doing {topic} the old way. Here's what actually works:",
+                "The {topic} industry doesn't want you to know this..."
+            ],
+            specificResult: [
+                "I {result} in {timeframe}. Here's the exact playbook:",
+                "From zero to {result} in {timeframe}. Thread 🧵",
+                "{result} in {timeframe} — and I did it without {commonThing}.",
+                "How I went from struggling to {result} ({timeframe}):",
+                "The {topic} strategy that got me {result}:"
+            ],
+            curiosityGap: [
+                "The #1 {topic} mistake that's costing you everything.",
+                "Why 99% of people fail at {topic} (and how to fix it):",
+                "I found a {topic} hack that nobody talks about...",
+                "The hidden truth about {topic} that changed everything for me.",
+                "What if everything you knew about {topic} was wrong?"
+            ],
+            storyHook: [
+                "3 years ago, I knew nothing about {topic}. Today, I {result}.",
+                "I almost gave up on {topic}. Then I discovered this:",
+                "The {topic} journey that changed my life:",
+                "I went from {badState} to {result}. Here's how:",
+                "My {topic} story (and the lessons I learned):"
+            ],
+            listPromise: [
+                "7 {topic} lessons I wish I knew earlier:",
+                "The 5 {topic} rules that changed everything:",
+                "10 {topic} tips that actually work:",
+                "{number} {topic} mistakes you're probably making:",
+                "The {topic} checklist I use daily:"
+            ],
+            patternInterrupt: [
+                "Stop. Before you do any more {topic}, read this.",
+                "Delete your {topic} strategy. Here's why:",
+                "Forget everything you know about {topic}.",
+                "Hot take: {topic} is overrated. Here's what matters:",
+                "Controversial: The best {topic} advice is to do less, not more."
+            ]
+        };
+
+        const insights = [
+            "completely misunderstood",
+            "easier than you think",
+            "broken beyond repair",
+            "about to change forever",
+            "hiding in plain sight"
+        ];
+
+        const commonThings = [
+            "paid ads",
+            "a huge following",
+            "any special tools",
+            "working 80-hour weeks",
+            "burning out"
+        ];
+
+        const badStates = [
+            "broke and confused",
+            "struggling for months",
+            "ready to quit",
+            "making zero progress",
+            "completely lost"
+        ];
+
+        const numbers = ["5", "7", "10", "12", "15"];
+
+        function getRandomItem(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function generateHook(template, data) {
+            let hook = template
+                .replace(/{topic}/g, data.topic)
+                .replace(/{result}/g, data.result || "amazing results")
+                .replace(/{timeframe}/g, data.timeframe || "90 days")
+                .replace(/{insight}/g, getRandomItem(insights))
+                .replace(/{commonThing}/g, getRandomItem(commonThings))
+                .replace(/{badState}/g, getRandomItem(badStates))
+                .replace(/{number}/g, getRandomItem(numbers));
+            return hook;
+        }
+
+        function generateAllHooks(data) {
+            const hooks = [];
+            
+            // Get one from each category
+            Object.keys(hookTemplates).forEach(category => {
+                const templates = hookTemplates[category];
+                const template = getRandomItem(templates);
+                hooks.push({
+                    category: formatCategoryName(category),
+                    hook: generateHook(template, data)
+                });
+            });
+
+            return hooks;
+        }
+
+        function formatCategoryName(category) {
+            const names = {
+                boldStatement: "🔥 Bold Statement",
+                specificResult: "📊 Specific Result",
+                curiosityGap: "🤔 Curiosity Gap",
+                storyHook: "📖 Story Hook",
+                listPromise: "📝 List Promise",
+                patternInterrupt: "⚡ Pattern Interrupt"
+            };
+            return names[category] || category;
+        }
+
+        function createHookCard(hookData, index) {
+            return `
+                <div class="hook-card bg-darker border border-white/10 rounded-xl p-5 fade-in" style="animation-delay: ${index * 0.1}s">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="text-xs text-accent font-semibold mb-2">${hookData.category}</div>
+                            <p class="text-white text-lg leading-relaxed">${hookData.hook}</p>
+                        </div>
+                        <button 
+                            onclick="copyHook(this, '${hookData.hook.replace(/'/g, "\\'")}')"
+                            class="copy-btn flex-shrink-0 bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white p-2 rounded-lg transition-all"
+                            title="Copy hook"
+                        >
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function copyHook(btn, text) {
+            navigator.clipboard.writeText(text).then(() => {
+                btn.innerHTML = `
+                    <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                `;
+                setTimeout(() => {
+                    btn.innerHTML = `
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                        </svg>
+                    `;
+                }, 1500);
+            });
+        }
+
+        let allGeneratedHooks = [];
+
+        function copyAllHooks() {
+            const allText = allGeneratedHooks.map(h => h.hook).join('\n\n');
+            navigator.clipboard.writeText(allText).then(() => {
+                alert('All hooks copied to clipboard!');
+            });
+        }
+
+        // Form submission
+        document.getElementById('hookForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const data = {
+                topic: document.getElementById('topic').value,
+                result: document.getElementById('result').value,
+                timeframe: document.getElementById('timeframe').value
+            };
+
+            const hooks = generateAllHooks(data);
+            allGeneratedHooks = hooks;
+
+            const container = document.getElementById('hooksContainer');
+            container.innerHTML = hooks.map((hook, i) => createHookCard(hook, i)).join('');
+
+            document.getElementById('results').classList.remove('hidden');
+            document.getElementById('ctaSection').classList.remove('hidden');
+
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    </script>
+</body>
+</html>
